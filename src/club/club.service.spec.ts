@@ -177,7 +177,6 @@ describe('ClubService', () => {
   it('delete debe arrojar un error debido a un club inexistente', async () => {
     const club: ClubEntity =
       clubsList[0];
-    await service.delete(club.id);
     await expect(() => service.delete('0')).rejects.toHaveProperty(
       'message',
       'El club con el id brindado no ha sido encontrado.',
