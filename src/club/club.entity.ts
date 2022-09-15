@@ -3,21 +3,21 @@ import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class ClubEntity {
- @PrimaryGeneratedColumn('uuid')
- id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
- @Column()
- nombre: string;
- 
- @Column()
- fechaFundacion: Date;
- 
- @Column()
- imagen: string;
+  @Column()
+  nombre: string;
 
- @Column()
- descripcion: string;
+  @Column()
+  fechaFundacion: Date;
 
- @ManyToMany(() => SocioEntity, (socio) => socio.clubes)
+  @Column()
+  imagen: string;
+
+  @Column()
+  descripcion: string;
+
+  @ManyToMany(() => SocioEntity, (socio) => socio.clubes)
   socios: SocioEntity[];
 }
