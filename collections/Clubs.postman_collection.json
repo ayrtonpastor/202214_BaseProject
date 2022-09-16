@@ -1,0 +1,835 @@
+{
+	"info": {
+		"_postman_id": "435a4d6d-3a79-448b-b016-b5512ccef97b",
+		"name": "Clubs",
+		"description": "Buy or rent spacecrafts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15401532"
+	},
+	"item": [
+		{
+			"name": "Crear un club válido.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"console.log(data)",
+							"pm.globals.set(\"idClub\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Regatas\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clubs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un club válido.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Regatas\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "223"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"df-vt18iZzB6d3Rm+wqxA5QXLFDi58\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:19:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Regatas\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\",\n    \"id\": \"3f679b4f-0152-400a-93bf-c1ea05b2bfc5\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un club inválido.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La descripción del club no puede tener más de 100 caracteres.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Club errado\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clubs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un club inválido.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club errado\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "94"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5e-yAAgi/TZ+8AqbsPw7zhwWknZZz0\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:19:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"La descripción del club no puede tener más de 100 caracteres.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los clubs.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of clubs > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los clubs.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "483"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e3-d84aLSDCkg9fSNvu+YHiuhMQh28\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:21:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"5159cf9b-e061-46cb-b3fd-9fa54075bfec\",\n        \"nombre\": \"Regatas\",\n        \"fechaFundacion\": \"2022-09-01T20:15:15.000Z\",\n        \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n        \"descripcion\": \"Es un club deportivo.\",\n        \"socios\": []\n    },\n    {\n        \"id\": \"3f679b4f-0152-400a-93bf-c1ea05b2bfc5\",\n        \"nombre\": \"Regatas\",\n        \"fechaFundacion\": \"2022-09-01T20:15:15.000Z\",\n        \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n        \"descripcion\": \"Es un club deportivo.\",\n        \"socios\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un club por ID.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/{{idClub}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						"{{idClub}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un club por ID.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{idClub}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{idClub}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "240"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f0-JDSYFEulznkyzjwEPEi5Jr6Bphw\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:23:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"3f679b4f-0152-400a-93bf-c1ea05b2bfc5\",\n    \"nombre\": \"Regatas\",\n    \"fechaFundacion\": \"2022-09-01T20:15:15.000Z\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\",\n    \"socios\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un club por un ID que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El club con el id brindado no ha sido encontrado.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un club por un ID que no existe.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-PDSG+oNNJg4JLoi/lfO2N+qKE9Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:25:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El club con el id brindado no ha sido encontrado.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un club.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Regatas - Lima\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clubs/{{idClub}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						"{{idClub}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un club.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Regatas - Lima\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{idClub}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{idClub}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "230"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e6-kKGq6+haU5BUo9h9/+vMEcbZdVk\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:28:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"3f679b4f-0152-400a-93bf-c1ea05b2bfc5\",\n    \"nombre\": \"Regatas - Lima\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un club con un ID que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El club con el id brindado no ha sido encontrado.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Regatas - Ecuador\",\n    \"fechaFundacion\": \"2022-09-01 15:15:15\",\n    \"imagen\": \"http://plus.clublia.com/Content/SiteImages/Login2016/club-lia-gang.png\",\n    \"descripcion\": \"Es un club deportivo.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clubs/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un club por su ID.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/{{idClub}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						"{{idClub}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un club por su ID.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{idClub}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{idClub}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:32:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar un club con un ID que no existe.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El club con el id brindado no ha sido encontrado.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un club con un ID que no existe.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-PDSG+oNNJg4JLoi/lfO2N+qKE9Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Sep 2022 00:33:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El club con el id brindado no ha sido encontrado.\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
